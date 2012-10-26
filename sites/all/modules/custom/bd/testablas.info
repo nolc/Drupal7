@@ -1,0 +1,5 @@
+name = testablas
+description = "Módulo para la creacion de tablas desde codigo en drupal"
+package = Aprendiendo a programar con Drupal
+core = 7.x
+files[] = testablas.module

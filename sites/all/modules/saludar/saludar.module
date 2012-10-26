@@ -1,0 +1,130 @@
+<?php
+/**
+ * @file
+ * Archivo para empezar a programar con Drupal
+ */
+
+/**
+ * Implementación del hook_menu()
+ */
+function saludar_menu() {
+  $items['saludar/hola-mundo'] = array(
+    'title' => 'Saludar',
+    'page callback' => 'saludar_hola_mundo',
+    'access callback' => TRUE,
+    //con esta opcion no aparece la pagina en el menu
+    'type' => MENU_CALLBACK,
+  );
+
+  //hacer configurable el saludo desde el administrador de drupal_get_form
+  $items['admin/config/content/saludar'] = array(
+    'title' => 'Saludar',
+    'description' => 'Configurar las opciones para el saludo.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('saludar_configuracion'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'saludar.admin.inc',
+  );
+
+
+
+  return $items;
+}
+
+/**
+ * Callback que implementa la página: saludar/hola-mundo
+ */
+// function saludar_hola_mundo() {
+//   return "Hola Mundo desde Drupal 7";
+// }
+
+
+function saludar_hola_mundo() {
+  $variables = array(
+    'message' => variable_get('saludar_saludo', t("Hello World") ),
+  );
+  return theme('saludar_hola_mundo', $variables);
+}
+
+/**
+ * Implementación del hook_theme()
+ */
+function saludar_theme() {
+  return array(
+    'saludar_hola_mundo' => array(
+      'template' => 'saludar-hola-mundo',
+    ),
+  );
+}
+
+
+
+
+//Creando un bloque
+
+/**
+ * Implementación del hook_block_info().
+ */
+function saludar_block_info() {
+  $blocks['hola_mundo'] = array(
+    'info' => 'Bloque para Hola Mundo',
+  );
+  return $blocks;
+}
+
+
+/**
+ * Implementación del hook_block_view().
+ */
+function saludar_block_view($delta = '') {
+  switch ($delta) {
+    case 'hola_mundo':
+      $block['content'] = saludar_hola_mundo();
+      //$block['subject'] ='hola mundo';
+      return $block;
+  }
+  break;
+}
+
+
+
+/**
+* Implementación del hook_user_login().
+*/
+// function saludar_user_login(&$edit, $account) {
+//   drupal_set_message("Hola " . $account->name);
+// }
+
+/**
+ * Implementación del hook_action_info().
+ */
+// function saludar_action_info() {
+//   return array(
+//     'saludar_usuario_action' => array(
+//       'type' => 'user',
+//       'label' => 'Saludar al usuario',
+//       'configurable' => FALSE,
+//       'triggers' => array('any'),
+//     ),
+//   );
+// }
+
+/**
+ * Acción de drupal que saluda al usuario
+ */
+function saludar_usuario_action() {
+  $message = "¡Bienvenido!";
+  if (user_is_logged_in()) {
+    $message = "Hola " . $GLOBALS['user']->name;
+  }
+  drupal_set_message($message);
+}
+
+
+//otra forma de saludar
+// function saludar_usuario_action() {
+//   drupal_set_message("Hola " . format_username($GLOBALS['user']));
+// }
+
+
+

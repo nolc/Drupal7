@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Implementación del hook_schema()
+ */
+
+ function testablas_schema(){
+ 	//inicializo un array vacio simplemente
+ 	$schema = array();
+ 	$schema['bd_ideas'] = array(
+        'description' => 'tabla de ejemplo de ideas.',
+        'fields' => array(
+		    'id' => array(
+			    'description' => 'campo unico autoincrementable.',
+			    //se define tipo serial para qye drupal lo tome tipo entero y autouncrementable
+			    'type' => 'serial',
+			    'unsigned' => TRUE,
+			    'not null' => TRUE,
+		    ),
+		    'uid' => array(
+			    'description' => 'id de usuario creador de la idea.',
+			    'type' => 'int',
+			    'unsigned' => TRUE,
+			    'not null' => TRUE,
+			    'default' => 0,
+		    ),
+		    'nombre' => array(
+			    'description' => 'nombre de la idea.',
+			    'type' => 'varchar',
+			    'length' => 200,
+			    'not null' => TRUE,
+		    ),
+		    'created' => array(
+			    'description' => 'fecha de creacion de la idea.',
+			    'type' => 'int',
+			    'unsigned' => TRUE,
+			    'not null' => TRUE,
+			    'default' => 0,
+		    ),
+		    'descripcion' => array(
+			    'description' => 'descripcion de la idea.',
+			    'type' => 'text',
+			    'not null' => TRUE,
+		    ),
+		),
+	    'primary key' => array('id'),
+	    'unique key' => array( 'id' => array('id') )
+
+	);
+    return $schema;
+
+
+ }
+
+

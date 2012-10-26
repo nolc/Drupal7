@@ -1,0 +1,14 @@
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+
+body{
+	background: #919191;
+}
+
+
+.container-12{
+	background: white;
+}
+
+/*.zone-branding{
+	background: orange;
+}*/
