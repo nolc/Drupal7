@@ -201,14 +201,14 @@
  * @endcode
  */
 $databases = array (
-  'default' => 
+  'default' =>
   array (
-    'default' => 
+    'default' =>
     array (
-      'database' => 'testdrupal7',
-      'username' => 'root',
-      'password' => 'root',
-      'host' => 'localhost',
+      'database' => 'newcolectivo',
+      'username' => 'keemo',
+      'password' => 'keemo',
+      'host' => '96.126.120.48',
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
@@ -216,6 +216,23 @@ $databases = array (
   ),
 );
 
+
+
+// $databases = array (
+//   'default' =>
+//   array (
+//     'default' =>
+//     array (
+//       'database' => 'testdrupal7',
+//       'username' => 'root',
+//       'password' => 'root',
+//       'host' => 'localhost',
+//       'port' => '',
+//       'driver' => 'mysql',
+//       'prefix' => '',
+//     ),
+//   ),
+// );
 /**
  * Access control for update.php script.
  *
